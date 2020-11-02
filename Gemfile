@@ -14,6 +14,7 @@ group :development, :test do
   gem "brakeman", require: false
   gem "bundler-audit", require: false
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
+  gem "dotenv-rails"
   gem "pry-byebug"
   gem "rspec-rails", "~> 4.0.1"
   gem "rubocop-performance", require: false

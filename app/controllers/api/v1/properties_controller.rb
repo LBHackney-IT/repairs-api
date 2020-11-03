@@ -4,11 +4,7 @@ module Api
   module V1
     class PropertiesController < ApplicationController
       def index
-        if params[:postcode]
-          @properties = Property.for_postcode(params[:postcode])
-        else
-          @properties = Property.for_address(params[:address])
-        end
+        @properties = PropertiesSearch.new(params).perform
 
         render json: @properties.to_json
       end

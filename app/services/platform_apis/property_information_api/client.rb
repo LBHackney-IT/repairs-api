@@ -6,6 +6,10 @@ module PlatformApis
       API_URL = ENV["PROPERTIES_API_URL"]
       API_KEY = ENV["X_API_KEY"]
 
+      def self.get_properties_by_address(address)
+        request.retrieve("properties/?address=#{address}")
+      end
+
       def self.get_properties_by_postcode(postcode)
         request.retrieve("properties/?postcode=#{postcode}")
       end

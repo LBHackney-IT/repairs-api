@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "faraday"
-require "json"
-
 class Connection
   def self.api(url:, key:)
     Faraday.new(url: url) do |faraday|

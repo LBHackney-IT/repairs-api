@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "connection"
-
 class Request
   def initialize(connection)
     @connection = connection

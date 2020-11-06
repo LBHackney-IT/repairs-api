@@ -3,27 +3,31 @@
 module PlatformApis
   module Properties
     class Client
-      def self.get_properties_by_address(address)
-        request.retrieve("properties?address=#{address}")
-      end
+      class << self
+        def get_properties_by_address(address)
+          request.retrieve("properties?address=#{address}")
+        end
 
-      def self.get_properties_by_postcode(postcode)
-        request.retrieve("properties?postcode=#{postcode}")
-      end
+        def get_properties_by_postcode(postcode)
+          request.retrieve("properties?postcode=#{postcode}")
+        end
 
-    private
+      private
 
-      def self.request
-        @request ||= Request.new(connection)
-      end
+        def request
+          @request ||= Request.new(connection)
+        end
 
-      def self.connection
-        Connection.api(
-          url:
-            Rails.application.credentials.platform_apis[:properties][:url],
-          key:
-            Rails.application.credentials.platform_apis[:properties][:x_api_key]
-        )
+        # rubocop:disable Layout/LineLength
+        def connection
+          Connection.api(
+            url:
+              Rails.application.credentials.platform_apis[:properties][:url],
+            key:
+              Rails.application.credentials.platform_apis[:properties][:x_api_key]
+          )
+        end
+        # rubocop:enable Layout/LineLength
       end
     end
   end

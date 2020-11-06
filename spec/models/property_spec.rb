@@ -27,7 +27,7 @@ RSpec.describe Property do
     let(:address) { "16 Pitcairn House" }
 
     it "returns an array of property objects built from the API client response" do
-      allow(PlatformApis::PropertyInformationApi::Client).to receive(
+      allow(PlatformApis::Properties::Client).to receive(
         :get_properties_by_address
       ).with(address).and_return(
         [
@@ -48,7 +48,7 @@ RSpec.describe Property do
     let(:postcode) { "E9 6PT" }
 
     it "returns an array of property objects built from the API client response" do
-      allow(PlatformApis::PropertyInformationApi::Client).to receive(
+      allow(PlatformApis::Properties::Client).to receive(
         :get_properties_by_postcode
       ).with(postcode).and_return(
         [

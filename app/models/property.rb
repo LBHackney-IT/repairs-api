@@ -6,13 +6,13 @@ class Property
   attr_accessor :propertyReference, :address, :hierarchyType
 
   def self.for_address(address)
-    response = PlatformApis::PropertyInformationApi::Client.
+    response = PlatformApis::Properties::Client.
       get_properties_by_address(address)
     response.map { |r| build(r) }
   end
 
   def self.for_postcode(postcode)
-    response = PlatformApis::PropertyInformationApi::Client.
+    response = PlatformApis::Properties::Client.
       get_properties_by_postcode(postcode)
     response.map { |r| build(r) }
   end

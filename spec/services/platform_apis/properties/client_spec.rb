@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PlatformApis::PropertyInformationApi::Client do
+RSpec.describe PlatformApis::Properties::Client do
   let(:request) { double }
 
   before do

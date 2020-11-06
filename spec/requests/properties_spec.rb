@@ -29,7 +29,7 @@ RSpec.describe "Properties" do
         expect(parsed_response.first).to eq(
           {
             "propertyReference" => "001",
-            "address"=> {
+            "address" => {
               "shortAddress" => "1 Example Road",
               "postcode" => "A1 1AA"
             },
@@ -67,7 +67,7 @@ RSpec.describe "Properties" do
         expect(parsed_response.first).to eq(
           {
             "propertyReference" => "001",
-            "address"=> {
+            "address" => {
               "shortAddress" => "1 Example Road",
               "postcode" => "A1 1AA"
             },
@@ -105,7 +105,7 @@ RSpec.describe "Properties" do
         expect(parsed_response.first).to eq(
           {
             "propertyReference" => "001",
-            "address"=> {
+            "address" => {
               "shortAddress" => "1 Example Road",
               "postcode" => "A1 1AA"
             },
@@ -119,7 +119,7 @@ RSpec.describe "Properties" do
     end
   end
 
-  def stub_properties_request(query_params: , response_body: , status:)
+  def stub_properties_request(query_params:, response_body:, status:)
     stub_request(
       :get,
       "#{Rails.application.credentials.platform_apis[:properties][:url]}properties"

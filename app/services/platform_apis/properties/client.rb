@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module PlatformApis
-  module PropertyInformationApi
+  module Properties
     class Client
       def self.get_properties_by_address(address)
         request.retrieve("properties?address=#{address}")
@@ -11,7 +11,7 @@ module PlatformApis
         request.retrieve("properties?postcode=#{postcode}")
       end
 
-      private
+    private
 
       def self.request
         @request ||= Request.new(connection)
@@ -19,8 +19,10 @@ module PlatformApis
 
       def self.connection
         Connection.api(
-          url: Rails.application.credentials.platform_apis[:properties][:url],
-          key: Rails.application.credentials.platform_apis[:properties][:x_api_key]
+          url:
+            Rails.application.credentials.platform_apis[:properties][:url],
+          key:
+            Rails.application.credentials.platform_apis[:properties][:x_api_key]
         )
       end
     end

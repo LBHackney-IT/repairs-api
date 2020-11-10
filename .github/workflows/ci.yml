@@ -41,6 +41,7 @@ jobs:
       env:
         DATABASE_URL: postgres://postgres:@localhost:5432/test
         RAILS_ENV: test
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       run: |
         gem install bundler
         bundle config path vendor/bundle
@@ -51,5 +52,6 @@ jobs:
       env:
         DATABASE_URL: postgres://postgres:@localhost:5432/test
         RAILS_ENV: test
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       run: |
         bundle exec rake

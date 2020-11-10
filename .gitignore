@@ -23,8 +23,9 @@
 !/storage/.keep
 .byebug_history
 
-# Ignore master key for decrypting credentials and more.
+# Ignore keys for decrypting credentials and more.
 /config/master.key
+/config/credentials/test.key
 
 # Ignore simplecov coverage results
 coverage

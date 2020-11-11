@@ -35,7 +35,8 @@ RSpec.describe "Properties" do
             },
             "hierarchyType" => {
               "levelCode" => "1",
-              "subTypeCode" => "DWE"
+              "subTypeCode" => "DWE",
+              "subTypeDescription" => "Dwelling"
             }
           }
         )
@@ -73,7 +74,8 @@ RSpec.describe "Properties" do
             },
             "hierarchyType" => {
               "levelCode" => "1",
-              "subTypeCode" => "DWE"
+              "subTypeCode" => "DWE",
+              "subTypeDescription" => "Dwelling"
             }
           }
         )
@@ -111,7 +113,8 @@ RSpec.describe "Properties" do
             },
             "hierarchyType" => {
               "levelCode" => "1",
-              "subTypeCode" => "DWE"
+              "subTypeCode" => "DWE",
+              "subTypeDescription" => "Dwelling"
             }
           }
         )

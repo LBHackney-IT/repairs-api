@@ -11,7 +11,7 @@ RSpec.describe HierarchyType do
       )
 
       expect(hierarchy_type.levelCode).to eq "7"
-      expect(hierarchy_type.subtypCode).to eq "DWE"
+      expect(hierarchy_type.subTypeCode).to eq "DWE"
     end
   end
 end

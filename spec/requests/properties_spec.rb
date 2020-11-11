@@ -31,11 +31,11 @@ RSpec.describe "Properties" do
             "propertyReference" => "001",
             "address" => {
               "shortAddress" => "1 Example Road",
-              "postcode" => "A1 1AA"
+              "postalCode" => "A1 1AA"
             },
             "hierarchyType" => {
               "levelCode" => "1",
-              "subtypCode" => "DWE"
+              "subTypeCode" => "DWE"
             }
           }
         )
@@ -69,11 +69,11 @@ RSpec.describe "Properties" do
             "propertyReference" => "001",
             "address" => {
               "shortAddress" => "1 Example Road",
-              "postcode" => "A1 1AA"
+              "postalCode" => "A1 1AA"
             },
             "hierarchyType" => {
               "levelCode" => "1",
-              "subtypCode" => "DWE"
+              "subTypeCode" => "DWE"
             }
           }
         )
@@ -107,11 +107,11 @@ RSpec.describe "Properties" do
             "propertyReference" => "001",
             "address" => {
               "shortAddress" => "1 Example Road",
-              "postcode" => "A1 1AA"
+              "postalCode" => "A1 1AA"
             },
             "hierarchyType" => {
               "levelCode" => "1",
-              "subtypCode" => "DWE"
+              "subTypeCode" => "DWE"
             }
           }
         )

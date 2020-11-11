@@ -3,12 +3,12 @@
 class HierarchyType
   include ActiveModel::Model
 
-  attr_accessor :levelCode, :subtypCode
+  attr_accessor :levelCode, :subTypeCode
 
   def self.build(attributes)
     new(
       levelCode: attributes["levelCode"],
-      subtypCode: attributes["subtypCode"]
+      subTypeCode: attributes["subtypCode"]
     )
   end
 end

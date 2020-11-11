@@ -24,4 +24,12 @@ RSpec.describe PlatformApis::Properties::Client do
       described_class.get_properties_by_postcode("E9 6PT")
     end
   end
+
+  describe ".get_property_by_reference" do
+    it "calls the Request object with a property reference id" do
+      expect(request).to receive(:retrieve).with("properties/100023022310")
+
+      described_class.get_property_by_reference("100023022310")
+    end
+  end
 end

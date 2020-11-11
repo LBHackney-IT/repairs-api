@@ -18,6 +18,13 @@ class Property
       response.map { |r| build(r) }
     end
 
+    def for_reference(reference)
+      response = PlatformApis::Properties::Client.
+        get_property_by_reference(reference)
+
+      build(response)
+    end
+
     def build(attributes)
       new(
         propertyReference: attributes["propRef"]&.strip,

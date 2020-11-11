@@ -122,6 +122,46 @@ RSpec.describe "Properties" do
     end
   end
 
+  describe "show" do
+    context "when searching by postcode" do
+      before do
+        stub_property_request(
+          reference: "100023022310",
+          response_body:
+            {
+              propRef: "100023022310",
+              address1: "1 Example Road",
+              postCode: "A1 1AA",
+              levelCode: "1",
+              subtypCode: "DWE"
+            },
+          status: 200
+        )
+
+        get("/api/v1/properties/100023022310")
+      end
+
+      it "returns a JSON representation from a single property" do
+        parsed_response = JSON.parse(response.body)
+
+        expect(parsed_response).to eq(
+          {
+            "propertyReference" => "100023022310",
+            "address" => {
+              "shortAddress" => "1 Example Road",
+              "postalCode" => "A1 1AA"
+            },
+            "hierarchyType" => {
+              "levelCode" => "1",
+              "subTypeCode" => "DWE",
+              "subTypeDescription" => "Dwelling"
+            }
+          }
+        )
+      end
+    end
+  end
+
   def stub_properties_request(query_params:, response_body:, status:)
     stub_request(
       :get,
@@ -129,6 +169,18 @@ RSpec.describe "Properties" do
     ).with(
       headers: { "X-Api-Key" => Rails.application.credentials.platform_apis[:properties][:x_api_key] },
       query:   query_params
+    ).to_return(
+      body: JSON.generate(response_body),
+      status: status
+    )
+  end
+
+  def stub_property_request(reference:, response_body:, status:)
+    stub_request(
+      :get,
+      "#{Rails.application.credentials.platform_apis[:properties][:url]}properties/#{reference}"
+    ).with(
+      headers: { "X-Api-Key" => Rails.application.credentials.platform_apis[:properties][:x_api_key] },
     ).to_return(
       body: JSON.generate(response_body),
       status: status

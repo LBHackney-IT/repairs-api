@@ -8,6 +8,12 @@ module Api
 
         render json: @properties.to_json
       end
+
+      def show
+        @property = Property.for_reference(params[:id])
+
+        render json: @property.to_json
+      end
     end
   end
 end

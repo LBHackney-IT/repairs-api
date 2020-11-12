@@ -3,12 +3,12 @@
 class Address
   include ActiveModel::Model
 
-  attr_accessor :shortAddress, :postcode
+  attr_accessor :shortAddress, :postalCode
 
   def self.build(attributes)
     new(
       shortAddress: attributes["address1"],
-      postcode: attributes["postCode"]
+      postalCode: attributes["postCode"]
     )
   end
 end

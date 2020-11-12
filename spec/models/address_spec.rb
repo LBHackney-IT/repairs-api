@@ -11,7 +11,7 @@ RSpec.describe Address do
       )
 
       expect(address.shortAddress).to eq "16 Pitcairn House  St Thomass Square"
-      expect(address.postcode).to eq "E9 6PT"
+      expect(address.postalCode).to eq "E9 6PT"
     end
   end
 end

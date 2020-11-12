@@ -1,6 +1,6 @@
 # Repairs API
 
-A Rails API to replace the previous service API for the Repairs Hub
+A Rails API to replace the previous service API for the Repairs Hub.
 
 | Dependency | Version |
 | ---------- | ------- |
@@ -36,6 +36,12 @@ You can run the full test suite using following command:
 
 ```sh
 $ rspec
+```
+
+You can run all the tasks set in the rakefile `bundle_audit brakeman rubocop spec` using :
+
+```sh
+$ rake
 ```
 
 #### Debugging using `binding.pry`
@@ -76,10 +82,10 @@ We use Github Actions as part of our continuous integration process to build, ru
 
 ## Rails credentials
 
-To run the app locally, you’ll need to have the Rails master key set within the app. Copy the password from the Hackney Repairs V2 folder in Unboxed’s 1Password and save it to a `master.key` file in the config directory (i.e. where credentials.yml.enc lives). Read https://edgeguides.rubyonrails.org/security.html#custom-credentials for more info on this approach
+To run the app locally, you’ll need to have the Rails master key and test key set within the app. Copy the master key password from the Hackney Repairs V2 folder in Unboxed’s 1Password and save it to a `master.key` file in the config directory (i.e. where credentials.yml.enc lives). Save the password from the test key to `config/credentials/test.key` Read https://edgeguides.rubyonrails.org/security.html#custom-credentials for more info on this approach.
 
-If using a service such as Postman API to test API requests, you will need the x-api-key and endpoint url which can also be found in the Hackney Repairs V2 1password vault
+If using a service such as Postman API to test API requests, you will need the x-api-key and endpoint url which can also be found in the Hackney Repairs V2 1password vault.
 
 ### Webmock
 
-We use webmock to mock real network interactions, like with the Hackney platform APIs.
+We use webmock to mock real network interactions, for example the Hackney platform APIs.

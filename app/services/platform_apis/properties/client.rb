@@ -12,6 +12,10 @@ module PlatformApis
           request.retrieve("properties?postcode=#{postcode}")
         end
 
+        def get_property_by_reference(reference)
+          request.retrieve("properties/#{reference}")
+        end
+
       private
 
         def request

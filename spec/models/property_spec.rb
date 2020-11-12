@@ -65,6 +65,27 @@ RSpec.describe Property do
     end
   end
 
+  describe ".for_reference" do
+    let(:reference) { "100023022310" }
+
+    it "returns a single property object built from the API client response" do
+      allow(PlatformApis::Properties::Client).to receive(
+        :get_property_by_reference
+      ).with(reference).and_return(
+        property_attributes_1
+      )
+
+      property = described_class.for_reference(reference)
+
+      expect(property.propertyReference).to eq "100023022310"
+      expect(property.address.postalCode).to eq("E9 6PT")
+      expect(property.address.shortAddress).to eq("16 Pitcairn House  St Thomass Square")
+      expect(property.hierarchyType.levelCode).to eq("7")
+      expect(property.hierarchyType.subTypeCode).to eq("DWE")
+      expect(property.hierarchyType.subTypeDescription).to eq("Dwelling")
+    end
+  end
+
   describe ".build" do
     it "builds a new property and child models with supplied attributes" do
       expect(Address).to receive(:build).once.with(property_attributes_1)

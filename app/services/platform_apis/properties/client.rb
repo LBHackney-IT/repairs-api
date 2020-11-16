@@ -27,8 +27,8 @@ module PlatformApis
           Connection.api(
             url:
               Rails.application.credentials.platform_apis[:properties][:url],
-            key:
-              Rails.application.credentials.platform_apis[:properties][:x_api_key]
+            token:
+              Rails.application.credentials.platform_apis[:properties][:token]
           )
         end
         # rubocop:enable Layout/LineLength

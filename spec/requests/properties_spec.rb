@@ -123,7 +123,7 @@ RSpec.describe "Properties" do
   end
 
   describe "show" do
-    context "when searching by postcode" do
+    context "when searching by a property reference" do
       before do
         stub_property_request(
           reference: "100023022310",

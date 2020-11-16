@@ -22,7 +22,7 @@ class Property
       response = PlatformApis::Properties::Client.
         get_property_by_reference(reference)
 
-      build(response)
+      response[:message] ? build(response) : []
     end
 
     def build(attributes)

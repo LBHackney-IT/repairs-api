@@ -84,7 +84,7 @@ We use Github Actions as part of our continuous integration process to build, ru
 
 To run the app locally, you’ll need to have the Rails master key and test key set within the app. Copy the master key password from the Hackney Repairs V2 folder in Unboxed’s 1Password and save it to a `master.key` file in the config directory (i.e. where credentials.yml.enc lives). Save the password from the test key to `config/credentials/test.key` Read https://edgeguides.rubyonrails.org/security.html#custom-credentials for more info on this approach.
 
-If using a service such as Postman API to test API requests, you will need the x-api-key and endpoint url which can also be found in the Hackney Repairs V2 1password vault.
+If using a service such as Postman API to test API requests, you will need the JWT token and endpoint url which can also be found in the Hackney Repairs V2 1password vault.
 
 ### Webmock
 

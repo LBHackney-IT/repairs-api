@@ -7,7 +7,7 @@ RSpec.configure do |config|
         :get,
         "#{Rails.application.credentials.platform_apis[:properties][:url]}properties"
       ).with(
-        headers: { "X-Api-Key" => Rails.application.credentials.platform_apis[:properties][:x_api_key] },
+        headers: { "Authorization" => Rails.application.credentials.platform_apis[:properties][:token] },
         query:   query_params
       ).to_return(
         body: JSON.generate(response_body),
@@ -20,7 +20,7 @@ RSpec.configure do |config|
         :get,
         "#{Rails.application.credentials.platform_apis[:properties][:url]}properties/#{reference}"
       ).with(
-        headers: { "X-Api-Key" => Rails.application.credentials.platform_apis[:properties][:x_api_key] },
+        headers: { "Authorization" => Rails.application.credentials.platform_apis[:properties][:token] },
       ).to_return(
         body: JSON.generate(response_body),
         status: status

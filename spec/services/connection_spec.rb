@@ -8,15 +8,15 @@ RSpec.describe Connection do
     let(:headers)            { spy }
 
     let(:url) { "https://www.example.com" }
-    let(:key) { "1234567890" }
+    let(:token) { "1234567890" }
 
-    it "makes a Faraday connection with the supplied URL and key in headers" do
+    it "makes a Faraday connection with the supplied URL and token in headers" do
       expect(Faraday).to receive(:new).with(url: url).and_yield(faraday_connection)
 
       expect(faraday_connection).to receive(:headers).at_least(:once).and_return headers
-      expect(headers).to receive(:[]=).with("x-api-key", key)
+      expect(headers).to receive(:[]=).with("Authorization", token)
 
-      described_class.api(url: url, key: key)
+      described_class.api(url: url, token: token)
     end
   end
 end

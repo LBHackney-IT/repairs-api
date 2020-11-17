@@ -89,3 +89,25 @@ If using a service such as Postman API to test API requests, you will need the J
 ### Webmock
 
 We use webmock to mock real network interactions, for example the Hackney platform APIs.
+
+## Building production docker
+
+### Create production docker
+
+```sh
+docker build -t repairs-api-production -f Dockerfile .
+```
+
+### Run production docker
+
+Replace `railsmasterkey` in the command below.
+
+```sh
+docker run --rm -it -p 3000:3000 -e DATABASE_URL=postgres://postgres@host.docker.internal:5432/repairs_api_development -e RAILS_SERVE_STATIC_FILES=true -e RAILS_ENV=production -e RAILS_LOG_TO_STDOUT=true -e RAILS_MASTER_KEY=railsmasterkey repairs-api-production:latest bundle exec rails s
+```
+
+### Run production docker bash
+
+```sh
+docker run --rm -it -e DATABASE_URL=postgres://postgres@host.docker.internal:5432/repairs_api_development -e RAILS_SERVE_STATIC_FILES=true -e RAILS_ENV=production -e RAILS_LOG_TO_STDOUT=true repairs-api-production:latest /bin/bash
+```

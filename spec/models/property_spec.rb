@@ -23,7 +23,7 @@ RSpec.describe Property do
     }
   end
 
-  describe ".for_address" do
+  xdescribe ".for_address" do
     let(:address) { "16 Pitcairn House" }
 
     it "returns an array of property objects built from the API client response" do
@@ -44,7 +44,7 @@ RSpec.describe Property do
     end
   end
 
-  describe ".for_postcode" do
+  xdescribe ".for_postcode" do
     let(:postcode) { "E9 6PT" }
 
     it "returns an array of property objects built from the API client response" do
@@ -65,7 +65,7 @@ RSpec.describe Property do
     end
   end
 
-  describe ".for_reference" do
+  xdescribe ".for_reference" do
     let(:reference) { "100023022310" }
 
     it "returns a single property object built from the API client response" do

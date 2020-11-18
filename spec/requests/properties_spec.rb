@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Properties" do
-  describe "index" do
+  xdescribe "index" do
     context "when searching by postcode" do
       before do
         stub_properties_request(
@@ -122,7 +122,7 @@ RSpec.describe "Properties" do
     end
   end
 
-  describe "show" do
+  xdescribe "show" do
     context "when searching by postcode" do
       before do
         stub_property_request(

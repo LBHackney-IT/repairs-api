@@ -31,7 +31,9 @@ RSpec.describe "Properties" do
             "propertyReference" => "001",
             "address" => {
               "shortAddress" => "1 Example Road",
-              "postalCode" => "A1 1AA"
+              "postalCode" => "A1 1AA",
+              "addressLine" => "1 Example Road",
+              "streetSuffix" => ""
             },
             "hierarchyType" => {
               "levelCode" => "1",
@@ -70,7 +72,9 @@ RSpec.describe "Properties" do
             "propertyReference" => "001",
             "address" => {
               "shortAddress" => "1 Example Road",
-              "postalCode" => "A1 1AA"
+              "postalCode" => "A1 1AA",
+              "addressLine" => "1 Example Road",
+              "streetSuffix" => ""
             },
             "hierarchyType" => {
               "levelCode" => "1",
@@ -109,7 +113,9 @@ RSpec.describe "Properties" do
             "propertyReference" => "001",
             "address" => {
               "shortAddress" => "1 Example Road",
-              "postalCode" => "A1 1AA"
+              "postalCode" => "A1 1AA",
+              "addressLine" => "1 Example Road",
+              "streetSuffix" => ""
             },
             "hierarchyType" => {
               "levelCode" => "1",
@@ -149,7 +155,9 @@ RSpec.describe "Properties" do
             "propertyReference" => "100023022310",
             "address" => {
               "shortAddress" => "1 Example Road",
-              "postalCode" => "A1 1AA"
+              "postalCode" => "A1 1AA",
+              "addressLine" => "1 Example Road",
+              "streetSuffix" => ""
             },
             "hierarchyType" => {
               "levelCode" => "1",

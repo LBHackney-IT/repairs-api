@@ -30,6 +30,7 @@ RSpec.describe "Properties" do
           {
             "propertyReference" => "001",
             "address" => {
+              "addressLine" => "1 Example Road",
               "shortAddress" => "1 Example Road",
               "postalCode" => "A1 1AA"
             },
@@ -69,6 +70,7 @@ RSpec.describe "Properties" do
           {
             "propertyReference" => "001",
             "address" => {
+              "addressLine" => "1 Example Road",
               "shortAddress" => "1 Example Road",
               "postalCode" => "A1 1AA"
             },
@@ -108,6 +110,7 @@ RSpec.describe "Properties" do
           {
             "propertyReference" => "001",
             "address" => {
+              "addressLine" => "1 Example Road",
               "shortAddress" => "1 Example Road",
               "postalCode" => "A1 1AA"
             },
@@ -148,6 +151,7 @@ RSpec.describe "Properties" do
           {
             "propertyReference" => "100023022310",
             "address" => {
+              "addressLine" => "1 Example Road",
               "shortAddress" => "1 Example Road",
               "postalCode" => "A1 1AA"
             },

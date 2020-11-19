@@ -80,6 +80,7 @@ RSpec.describe Property do
       expect(property.propertyReference).to eq "100023022310"
       expect(property.address.postalCode).to eq("E9 6PT")
       expect(property.address.shortAddress).to eq("16 Pitcairn House  St Thomass Square")
+      expect(property.address.addressLine).to eq("16 Pitcairn House")
       expect(property.hierarchyType.levelCode).to eq("7")
       expect(property.hierarchyType.subTypeCode).to eq("DWE")
       expect(property.hierarchyType.subTypeDescription).to eq("Dwelling")

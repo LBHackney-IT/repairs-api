@@ -29,3 +29,6 @@
 
 # Ignore simplecov coverage results
 coverage
+
+# Ignore terraform work files
+.terraform/

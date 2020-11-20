@@ -6,4 +6,6 @@ Rails.application.routes.draw do
       resources :properties, only: [:index, :show]
     end
   end
+
+  get :healthcheck, to: proc { [200, {}, %w[OK]] }
 end

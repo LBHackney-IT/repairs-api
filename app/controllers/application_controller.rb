@@ -5,10 +5,12 @@ class ApplicationController < ActionController::API
 
   def authenticate_token!
     payload = JsonWebToken.decode(auth_token)
-    @current_api_client = ApiClient.find_by(
+    ApiClient.find_by!(
       client_id: payload["client_id"],
       client_secret: payload["client_secret"]
     )
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { errors: e.message }, status: :unauthorized
   rescue JWT::DecodeError
     render json: { errors: "Invalid auth token" }, status: :unauthorized
   end

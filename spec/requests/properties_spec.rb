@@ -155,6 +155,34 @@ RSpec.describe "Properties" do
         expect(parsed_response.first).to eq(["errors", "Invalid auth token"])
       end
     end
+
+    context "when searching by postcode with a valid headers and the ApiClient is not present" do
+      let(:api_client) { build(:api_client) }
+
+      before do
+        stub_properties_request(
+          query_params: { postcode: "A1 1AA" },
+          response_body: [
+            {
+              propRef: "001",
+              address1: "1 Example Road",
+              postCode: "A1 1AA",
+              levelCode: "1",
+              subtypCode: "DWE"
+            }
+          ],
+          status: 200
+        )
+
+        get("/api/v1/properties", params: { postcode: "A1 1AA" }, headers: headers)
+      end
+
+      it "returns JSON representations of properties" do
+        parsed_response = JSON.parse(response.body)
+
+        expect(parsed_response.first).to eq(["errors", "Couldn't find ApiClient"])
+      end
+    end
   end
 
   describe "show" do

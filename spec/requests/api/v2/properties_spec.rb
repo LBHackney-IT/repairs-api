@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Properties" do
+RSpec.describe Api::V2::PropertiesController do
   let(:api_client) { create(:api_client) }
   let(:headers) { AuthHelper.auth_headers(api_client.token) }
 

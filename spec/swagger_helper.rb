@@ -14,25 +14,11 @@ RSpec.configure do |config|
   # By default, the operations defined in spec files are added to the first
   # document below. You can override this behavior by adding a swagger_doc tag
   # to the root example_group in your specs, e.g. describe '...', swagger_doc: 'v2/swagger.json'
+
+  swagger_doc_v1 = YAML.load_file('spec/swagger/swagger_doc_v1.yaml')
+
   config.swagger_docs = {
-    "v1/swagger.yaml" => {
-      openapi: "3.0.1",
-      info: {
-        title: "API V1",
-        version: "v1"
-      },
-      paths: {},
-      servers: [
-        {
-          url: "http://localhost:3000",
-          variables: {
-            defaultHost: {
-              default: "www.example.com"
-            }
-          }
-        }
-      ]
-    }
+    "v1/swagger.yaml" => swagger_doc_v1
   }
 
   # Specify the format of the output Swagger file when running 'rswag:specs:swaggerize'.

@@ -5,22 +5,20 @@ require "rails_helper"
 RSpec.describe ApiClient, type: :model do
   subject { described_class.create }
 
-  context "#validations" do
-    it "cannot create an api_client without a client_id set" do
-      expect(subject.errors.messages[:client_id][0]).to eq("can't be blank")
-    end
+  it "generates a new client secret" do
+    expect(subject.client_secret).not_to be_empty
+    expect(subject.client_id).not_to be_empty
+  end
 
-    it "cannot create an api_client without a client_secret set" do
-      expect(subject.errors.messages[:client_secret][0]).to eq("can't be blank")
-    end
-
-    it "must have a unique client_id and client_secret" do
+  context "when the api_client exists" do
+    before do
       create(:api_client)
-      api_client = build(:api_client)
-      api_client.save
+    end
 
-      expect(api_client.errors.messages[:client_id][0]).to eq("has already been taken")
-      expect(api_client.errors.messages[:client_secret][0]).to eq("has already been taken")
+    it "raises an error" do
+      api_client = build(:api_client)
+
+      expect { api_client.save }.to raise_error(ActiveRecord::RecordNotUnique)
     end
   end
 end

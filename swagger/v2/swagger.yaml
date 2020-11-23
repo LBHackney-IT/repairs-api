@@ -3,7 +3,166 @@ openapi: 3.0.1
 info:
   title: API V2
   version: v2
-paths: {}
+paths:
+  "/api/v2/properties/{propertyReference}":
+    get:
+      summary: Retrieves a property
+      tags:
+      - Properties
+      parameters:
+      - name: propertyReference
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Property found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  propertyReference:
+                    type: string
+                  address:
+                    properties:
+                      shortAddress:
+                        type: string
+                      postalCode:
+                        type: string
+                      addressLine:
+                        type: string
+                      streetSuffix:
+                        type: string
+                  hierarchyType:
+                    properties:
+                      levelCode:
+                        type: string
+                      subTypeCode:
+                        type: string
+                      subTypeDescription:
+                        type: string
+                required:
+                - propertyReference
+  "/api/v2/properties/?address={address}":
+    get:
+      summary: Retrieves all matching properties given the address params
+      tags:
+      - Properties
+      parameters:
+      - name: address
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Properties found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  propertyReference:
+                    type: string
+                  address:
+                    properties:
+                      shortAddress:
+                        type: string
+                      postalCode:
+                        type: string
+                      addressLine:
+                        type: string
+                      streetSuffix:
+                        type: string
+                  hierarchyType:
+                    properties:
+                      levelCode:
+                        type: string
+                      subTypeCode:
+                        type: string
+                      subTypeDescription:
+                        type: string
+  "/api/v2/properties/?postcode={postcode}":
+    get:
+      summary: Retrieves all matching properties given the postcode params
+      tags:
+      - Properties
+      parameters:
+      - name: postcode
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Properties found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  propertyReference:
+                    type: string
+                  address:
+                    properties:
+                      shortAddress:
+                        type: string
+                      postalCode:
+                        type: string
+                      addressLine:
+                        type: string
+                      streetSuffix:
+                        type: string
+                  hierarchyType:
+                    properties:
+                      levelCode:
+                        type: string
+                      subTypeCode:
+                        type: string
+                      subTypeDescription:
+                        type: string
+  "/api/v2/properties/?q={params}":
+    get:
+      summary: Retrieves all matching properties given the query (address or postcode)
+        params
+      tags:
+      - Properties
+      parameters:
+      - name: params
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Properties found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  propertyReference:
+                    type: string
+                  address:
+                    properties:
+                      shortAddress:
+                        type: string
+                      postalCode:
+                        type: string
+                      addressLine:
+                        type: string
+                      streetSuffix:
+                        type: string
+                  hierarchyType:
+                    properties:
+                      levelCode:
+                        type: string
+                      subTypeCode:
+                        type: string
+                      subTypeDescription:
+                        type: string
 servers:
 - url: http://localhost:3000
   variables:

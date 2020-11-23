@@ -3,9 +3,137 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
-paths: {}
+paths:
+  "/api/v1/properties/{propertyReference}":
+    get:
+      summary: Retrieves a property
+      tags:
+      - Properties
+      parameters:
+      - name: propertyReference
+        in: path
+        description: The property reference
+        example: '00023404'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Property found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  propertyReference:
+                    type: string
+                  address:
+                    properties:
+                      shortAddress:
+                        type: string
+                      postalCode:
+                        type: string
+                      addressLine:
+                        type: string
+                      streetSuffix:
+                        type: string
+                  hierarchyType:
+                    properties:
+                      levelCode:
+                        type: string
+                      subTypeCode:
+                        type: string
+                      subTypeDescription:
+                        type: string
+                required:
+                - propertyReference
+        '401':
+          description: Invalid auth token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Invalid auth token
+  "/api/v1/properties":
+    get:
+      summary: Retrieves all matching properties given the query params
+      tags:
+      - Properties
+      parameters:
+      - name: address
+        in: query
+        required: false
+        description: A partial or full address
+        example: St Thomass Square
+        schema:
+          type: string
+      - name: postcode
+        in: query
+        required: false
+        description: A postcode
+        example: E9 6PT
+        schema:
+          type: string
+      - name: q
+        in: query
+        required: false
+        description: A postcode or partial or full address
+        example: E9 6PT
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Properties found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    propertyReference:
+                      type: string
+                    address:
+                      properties:
+                        shortAddress:
+                          type: string
+                        postalCode:
+                          type: string
+                        addressLine:
+                          type: string
+                        streetSuffix:
+                          type: string
+                    hierarchyType:
+                      properties:
+                        levelCode:
+                          type: string
+                        subTypeCode:
+                          type: string
+                        subTypeDescription:
+                          type: string
+        '401':
+          description: Invalid auth token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Invalid auth token
 servers:
 - url: http://localhost:3000
   variables:
     defaultHost:
       default: www.example.com
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+- bearerAuth: []

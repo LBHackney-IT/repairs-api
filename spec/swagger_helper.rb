@@ -19,7 +19,7 @@ RSpec.configure do |config|
 
   config.swagger_docs = {
     "v1/swagger.yaml" => swagger_doc_v1
-  }
+  }.with_indifferent_access
 
   # Specify the format of the output Swagger file when running 'rswag:specs:swaggerize'.
   # The swagger_docs configuration option has the filename including format in

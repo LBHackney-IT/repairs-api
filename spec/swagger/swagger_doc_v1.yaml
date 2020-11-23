@@ -5,7 +5,15 @@ info:
   version: v1
 paths: {}
 servers:
-- url: http://localhost:3000
-  variables:
-    defaultHost:
-      default: www.example.com
+  - url: http://localhost:3000
+    variables:
+      defaultHost:
+        default: www.example.com
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

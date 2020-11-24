@@ -11,6 +11,7 @@ gem "puma", "~> 4.1"
 gem "rack-cors"
 gem "rails", "~> 6.0.3"
 gem "faraday"
+gem "rswag"
 
 group :development, :test do
   gem "brakeman", require: false

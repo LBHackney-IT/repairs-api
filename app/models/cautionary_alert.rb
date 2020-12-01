@@ -16,9 +16,7 @@ class CautionaryAlert
     def build(attributes)
       new(
         propertyReference: attributes["propertyReference"],
-        # rubocop:disable Layout/LineLength
-        alerts: attributes["alerts"].empty? ? {} : Alert.build(attributes["alerts"].first)
-        # rubocop:enable Layout/LineLength
+        alerts: attributes["alerts"].map { |alert| Alert.build(alert) }
       )
     end
   end

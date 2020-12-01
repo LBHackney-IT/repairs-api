@@ -35,12 +35,14 @@ RSpec.describe "CautionaryAlerts" do
         expect(parsed_response).to eq(
           {
             "propertyReference" => "0001234",
-            "alerts" => {
-              "alertCode" => "DIS",
-              "description" => "Property Under Disrepair",
-              "startDate" => "2011-02-16",
-              "endDate" => nil
-            }
+            "alerts" => [
+              {
+                "alertCode" => "DIS",
+                "description" => "Property Under Disrepair",
+                "startDate" => "2011-02-16",
+                "endDate" => nil
+              }
+            ]
           }
         )
       end
@@ -67,7 +69,7 @@ RSpec.describe "CautionaryAlerts" do
         expect(parsed_response).to eq(
           {
             "propertyReference" => "0001234",
-            "alerts" => {}
+            "alerts" => []
           }
         )
       end

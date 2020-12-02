@@ -26,7 +26,7 @@ RSpec.describe "CautionaryAlerts" do
           status: 200
         )
 
-        get("/api/v1/properties/0001234/cautionary-alerts", headers: headers)
+        get("/api/v2/properties/0001234/cautionary-alerts", headers: headers)
       end
 
       it "returns a JSON representation from a single property" do
@@ -60,7 +60,7 @@ RSpec.describe "CautionaryAlerts" do
           status: 200
         )
 
-        get("/api/v1/properties/0001234/cautionary-alerts", headers: headers)
+        get("/api/v2/properties/0001234/cautionary-alerts", headers: headers)
       end
 
       it "returns a JSON representation from a single property" do
@@ -94,7 +94,7 @@ RSpec.describe "CautionaryAlerts" do
           status: 200
         )
 
-        get("/api/v1/properties/0001234/cautionary-alerts", headers: nil)
+        get("/api/v2/properties/0001234/cautionary-alerts", headers: nil)
       end
 
       it "returns invalid auth token error message" do
@@ -125,7 +125,7 @@ RSpec.describe "CautionaryAlerts" do
           status: 200
         )
 
-        get("/api/v1/properties/0001234/cautionary-alerts", headers: headers)
+        get("/api/v2/properties/0001234/cautionary-alerts", headers: headers)
       end
 
       it "returns couldn't find ApiClient error message" do

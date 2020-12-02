@@ -23,7 +23,7 @@ RSpec.describe "Properties" do
           status: 200
         )
 
-        get("/api/v1/properties", params: { postcode: "A1 1AA" }, headers: headers)
+        get("/api/v2/properties", params: { postcode: "A1 1AA" }, headers: headers)
       end
 
       it "returns JSON representations of properties" do
@@ -64,7 +64,7 @@ RSpec.describe "Properties" do
           status: 200
         )
 
-        get("/api/v1/properties", params: { address: "1 Example Road" }, headers: headers)
+        get("/api/v2/properties", params: { address: "1 Example Road" }, headers: headers)
       end
 
       it "returns JSON representations of properties" do
@@ -105,7 +105,7 @@ RSpec.describe "Properties" do
           status: 200
         )
 
-        get("/api/v1/properties", params: { q: "1 Example Road" }, headers: headers)
+        get("/api/v2/properties", params: { q: "1 Example Road" }, headers: headers)
       end
 
       it "returns JSON representations of properties" do
@@ -146,7 +146,7 @@ RSpec.describe "Properties" do
           status: 200
         )
 
-        get("/api/v1/properties", params: { postcode: "A1 1AA" }, headers: nil)
+        get("/api/v2/properties", params: { postcode: "A1 1AA" }, headers: nil)
       end
 
       it "returns JSON representations of properties" do
@@ -174,7 +174,7 @@ RSpec.describe "Properties" do
           status: 200
         )
 
-        get("/api/v1/properties", params: { postcode: "A1 1AA" }, headers: headers)
+        get("/api/v2/properties", params: { postcode: "A1 1AA" }, headers: headers)
       end
 
       it "returns JSON representations of properties" do
@@ -201,7 +201,7 @@ RSpec.describe "Properties" do
           status: 200
         )
 
-        get("/api/v1/properties/100023022310", headers: headers)
+        get("/api/v2/properties/100023022310", headers: headers)
       end
 
       it "returns a JSON representation from a single property" do

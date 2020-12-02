@@ -134,5 +134,32 @@ RSpec.describe "CautionaryAlerts" do
         expect(parsed_response.first).to eq(["errors", "Couldn't find ApiClient"])
       end
     end
+
+    context "when searching by a property reference that has no alerts" do
+      before do
+        stub_cautionary_alerts_property_request(
+          reference: "0123",
+          response_body: "Property cautionary alert(s) for property reference 0123 not found",
+          status: 404
+        )
+
+        get("/api/v2/properties/0123/cautionary-alerts", headers: headers)
+      end
+
+      it "returns error hash response" do
+        parsed_response = JSON.parse(response.body)
+
+        expect(parsed_response).to eq(
+          {
+            "errors" => [
+              {
+                "status" => 404,
+                "title" => "Property cautionary alert(s) for property reference 0123 not found"
+              }
+            ]
+          }
+        )
+      end
+    end
   end
 end

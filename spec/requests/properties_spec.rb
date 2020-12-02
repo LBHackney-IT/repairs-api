@@ -225,5 +225,36 @@ RSpec.describe "Properties" do
         )
       end
     end
+
+    context "when searching by an invalid property reference" do
+      before do
+        stub_property_request(
+          reference: "124124241",
+          response_body:
+            {
+              "title": "Not Found",
+              "status": 404
+            },
+          status: 404
+        )
+
+        get("/api/v2/properties/124124241", headers: headers)
+      end
+
+      it "returns error hash response" do
+        parsed_response = JSON.parse(response.body)
+
+        expect(parsed_response).to eq(
+          {
+            "errors" => [
+              {
+                "status" => 404,
+                "title" => "Not Found"
+              }
+            ]
+          }
+        )
+      end
+    end
   end
 end

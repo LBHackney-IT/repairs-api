@@ -10,7 +10,7 @@ class CautionaryAlert
       response = PlatformApis::CautionaryAlerts::Client.
         get_cautionary_alerts_by_property_reference(reference)
 
-      response.key?(:message) ? [] : build(response)
+      build(response)
     end
 
     def build(attributes)

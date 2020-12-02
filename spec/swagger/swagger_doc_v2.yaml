@@ -1,14 +1,9 @@
 ---
 openapi: 3.0.1
 info:
-  title: API V1
-  version: v1
+  title: Repairs Hub Service API V2
+  version: v2
 paths: {}
-servers:
-  - url: http://localhost:3000
-    variables:
-      defaultHost:
-        default: www.example.com
 components:
   securitySchemes:
     bearerAuth:

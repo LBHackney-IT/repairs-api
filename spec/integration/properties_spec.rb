@@ -5,7 +5,7 @@ require "swagger_helper"
 RSpec.describe "Properties API" do
   let(:api_client) { create(:api_client) }
 
-  path "/api/v1/properties/{propertyReference}" do
+  path "/api/v2/properties/{propertyReference}" do
     get "Retrieves a property" do
       tags "Properties"
       produces "application/json"
@@ -68,7 +68,7 @@ RSpec.describe "Properties API" do
     end
   end
 
-  path "/api/v1/properties" do
+  path "/api/v2/properties" do
     get "Retrieves all matching properties given the query params" do
       tags "Properties"
       produces "application/json"

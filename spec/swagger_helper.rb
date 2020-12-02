@@ -15,10 +15,10 @@ RSpec.configure do |config|
   # document below. You can override this behavior by adding a swagger_doc tag
   # to the root example_group in your specs, e.g. describe '...', swagger_doc: 'v2/swagger.json'
 
-  swagger_doc_v1 = YAML.load_file('spec/swagger/swagger_doc_v1.yaml')
+  swagger_doc_v2 = YAML.load_file('spec/swagger/swagger_doc_v2.yaml')
 
   config.swagger_docs = {
-    "v1/swagger.yaml" => swagger_doc_v1
+    "v2/swagger.yaml" => swagger_doc_v2
   }.with_indifferent_access
 
   # Specify the format of the output Swagger file when running 'rswag:specs:swaggerize'.

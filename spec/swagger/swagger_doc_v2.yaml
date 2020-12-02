@@ -9,3 +9,10 @@ servers:
   variables:
     defaultHost:
       default: www.example.com
+components:
+  securitySchemes:
+    Bearer:
+      description: JWT key necessary to use API calls
+      type: apiKey
+      name: Authorization
+      in: :header

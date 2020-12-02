@@ -9,6 +9,8 @@ paths:
       summary: Retrieves a property
       tags:
       - Properties
+      security:
+      - Bearer: {}
       parameters:
       - name: propertyReference
         in: path
@@ -50,6 +52,8 @@ paths:
       summary: Retrieves all matching properties given the address params
       tags:
       - Properties
+      security:
+      - Bearer: {}
       parameters:
       - name: address
         in: path
@@ -89,6 +93,8 @@ paths:
       summary: Retrieves all matching properties given the postcode params
       tags:
       - Properties
+      security:
+      - Bearer: {}
       parameters:
       - name: postcode
         in: path
@@ -129,6 +135,8 @@ paths:
         params
       tags:
       - Properties
+      security:
+      - Bearer: {}
       parameters:
       - name: params
         in: path
@@ -168,3 +176,10 @@ servers:
   variables:
     defaultHost:
       default: www.example.com
+components:
+  securitySchemes:
+    Bearer:
+      description: JWT key necessary to use API calls
+      type: apiKey
+      name: Authorization
+      in: header

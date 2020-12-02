@@ -7,7 +7,12 @@ RSpec.describe "Properties API" do
     get "Retrieves a property" do
       tags "Properties"
       produces "application/json"
+
+      security [Bearer: {}]
+
       parameter name: :propertyReference, in: :path, type: :string
+
+      let(:api_client) { create(:api_client) }
 
       response "200", "Property found" do
         schema type: :object,
@@ -31,7 +36,9 @@ RSpec.describe "Properties API" do
           },
           required: [ "propertyReference" ]
 
+        let(:Authorization) { "Bearer #{api_client.token}" }
         let(:propertyReference) { "00023404" }
+
         run_test!
       end
     end
@@ -41,7 +48,12 @@ RSpec.describe "Properties API" do
     get "Retrieves all matching properties given the address params" do
       tags "Properties"
       produces "application/json"
+
+      security [Bearer: {}]
+
       parameter name: :address, in: :path, type: :string
+
+      let(:api_client) { create(:api_client) }
 
       response "200", "Properties found" do
         schema type: :object,
@@ -64,7 +76,9 @@ RSpec.describe "Properties API" do
             }
           }
 
+        let(:Authorization) { "Bearer #{api_client.token}" }
         let(:address) { "banister house" }
+
         run_test!
       end
     end
@@ -74,7 +88,12 @@ RSpec.describe "Properties API" do
     get "Retrieves all matching properties given the postcode params" do
       tags "Properties"
       produces "application/json"
+
+      security [Bearer: {}]
+
       parameter name: :postcode, in: :path, type: :string
+
+      let(:api_client) { create(:api_client) }
 
       response "200", "Properties found" do
         schema type: :object,
@@ -97,7 +116,9 @@ RSpec.describe "Properties API" do
             }
           }
 
+        let(:Authorization) { "Bearer #{api_client.token}" }
         let(:postcode) { "E9 6BT" }
+
         run_test!
       end
     end
@@ -107,7 +128,12 @@ RSpec.describe "Properties API" do
     get "Retrieves all matching properties given the query (address or postcode) params" do
       tags "Properties"
       produces "application/json"
+
+      security [Bearer: {}]
+
       parameter name: :params, in: :path, type: :string
+
+      let(:api_client) { create(:api_client) }
 
       response "200", "Properties found" do
         schema type: :object,
@@ -130,7 +156,9 @@ RSpec.describe "Properties API" do
             }
           }
 
+        let(:Authorization) { "Bearer #{api_client.token}" }
         let(:params) { "E9 6BT" }
+
         run_test!
       end
     end

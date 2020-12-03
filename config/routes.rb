@@ -10,4 +10,7 @@ Rails.application.routes.draw do
   end
 
   get :healthcheck, to: proc { [200, {}, %w[OK]] }
+
+  mount Rswag::Api::Engine => "/api-docs"
+  mount Rswag::Ui::Engine => "/api-docs"
 end

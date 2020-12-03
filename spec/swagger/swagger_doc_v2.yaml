@@ -1,0 +1,14 @@
+---
+openapi: 3.0.1
+info:
+  title: Repairs Hub Service API V2
+  version: v2
+paths: {}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

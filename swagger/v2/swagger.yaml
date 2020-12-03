@@ -1,0 +1,182 @@
+---
+openapi: 3.0.1
+info:
+  title: Repairs Hub Service API V2
+  version: v2
+paths:
+  "/api/v2/properties/{propertyReference}/cautionary-alerts":
+    get:
+      summary: Retrieves cautionary alerts
+      tags:
+      - Cautionary Alerts
+      parameters:
+      - name: propertyReference
+        in: path
+        description: The property reference
+        example: '00023404'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Gets all cautionary alerts for a property
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  propertyReference:
+                    type: string
+                  alerts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        alertCode:
+                          type: string
+                        description:
+                          type: string
+                        startDate:
+                          type: string
+                        endDate:
+                          type: string
+                required:
+                - propertyReference
+        '401':
+          description: Invalid auth token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Invalid auth token
+  "/api/v2/properties/{propertyReference}":
+    get:
+      summary: Retrieves a property
+      tags:
+      - Properties
+      parameters:
+      - name: propertyReference
+        in: path
+        description: The property reference
+        example: '00023404'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Property found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  propertyReference:
+                    type: string
+                  address:
+                    properties:
+                      shortAddress:
+                        type: string
+                      postalCode:
+                        type: string
+                      addressLine:
+                        type: string
+                      streetSuffix:
+                        type: string
+                  hierarchyType:
+                    properties:
+                      levelCode:
+                        type: string
+                      subTypeCode:
+                        type: string
+                      subTypeDescription:
+                        type: string
+                required:
+                - propertyReference
+        '401':
+          description: Invalid auth token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Invalid auth token
+  "/api/v2/properties":
+    get:
+      summary: Retrieves all matching properties given the query params
+      tags:
+      - Properties
+      parameters:
+      - name: address
+        in: query
+        required: false
+        description: A partial or full address
+        example: St Thomass Square
+        schema:
+          type: string
+      - name: postcode
+        in: query
+        required: false
+        description: A postcode
+        example: E9 6PT
+        schema:
+          type: string
+      - name: q
+        in: query
+        required: false
+        description: A postcode or partial or full address
+        example: E9 6PT
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Properties found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    propertyReference:
+                      type: string
+                    address:
+                      properties:
+                        shortAddress:
+                          type: string
+                        postalCode:
+                          type: string
+                        addressLine:
+                          type: string
+                        streetSuffix:
+                          type: string
+                    hierarchyType:
+                      properties:
+                        levelCode:
+                          type: string
+                        subTypeCode:
+                          type: string
+                        subTypeDescription:
+                          type: string
+        '401':
+          description: Invalid auth token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Invalid auth token
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+- bearerAuth: []

@@ -88,7 +88,7 @@ Layout/LeadingCommentSpace:
   Enabled: true
 
 Layout/LineLength:
-  Max: 80
+  Max: 120
   Exclude:
     - "spec/**/*"
 
@@ -158,7 +158,7 @@ Lint/UriEscapeUnescape:
 
 # Don't worry about long methods in specs.
 Metrics/MethodLength:
-  Max: 10
+  Max: 14
   Exclude:
     - "spec/**/*"
 

@@ -3,6 +3,8 @@
 class ApplicationController < ActionController::API
   before_action :authenticate_token!
 
+  include Api::ErrorHandler
+
   def authenticate_token!
     payload = JsonWebToken.decode(auth_token)
     ApiClient.find_by!(

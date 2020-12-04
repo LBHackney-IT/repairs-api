@@ -65,6 +65,35 @@ RSpec.describe "Properties API" do
 
         run_test!
       end
+
+      response "404", "Property not found" do
+        let(:"Authorization") { "Bearer #{api_client.token}" }
+
+        before do
+          stub_property_request(
+            reference: "999",
+            response_body: "Please use a valid property reference",
+            status: 404
+          )
+        end
+
+        schema type: :object,
+        properties: {
+          errors: {
+            type: :array,
+            items: {
+              type: :object,
+              properties: {
+                title: { type: :string },
+                status: { type: :string, example: "404" }
+              }
+            }
+          }
+        }
+
+        let(:propertyReference) { "999" }
+        run_test!
+      end
     end
   end
 

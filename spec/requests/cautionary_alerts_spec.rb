@@ -153,7 +153,7 @@ RSpec.describe "CautionaryAlerts" do
           {
             "errors" => [
               {
-                "status" => 404,
+                "status" => "404",
                 "title" => "Property cautionary alert(s) for property reference 0123 not found"
               }
             ]

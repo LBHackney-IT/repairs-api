@@ -233,7 +233,7 @@ RSpec.describe "Properties" do
           response_body:
             {
               "title": "Not Found",
-              "status": 404
+              "status": "404"
             },
           status: 404
         )
@@ -248,7 +248,7 @@ RSpec.describe "Properties" do
           {
             "errors" => [
               {
-                "status" => 404,
+                "status" => "404",
                 "title" => "Not Found"
               }
             ]

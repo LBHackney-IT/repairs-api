@@ -18,10 +18,10 @@ module Api::ErrorHandler
         errors: [
           {
             title: error_hash[:message]["title"] || error_hash[:message],
-            status: error_hash[:status] || API_ERROR
+            status: error_hash[:status].to_s || API_ERROR.to_s
           }
         ]
-      }, status: error_hash[:status] || API_ERROR
+      }, status: error_hash[:status].to_s || API_ERROR.to_s
     end
   end
 end

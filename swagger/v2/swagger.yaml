@@ -52,6 +52,23 @@ paths:
                   errors:
                     type: string
                     example: Invalid auth token
+        '404':
+          description: Property not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        status:
+                          type: string
+                          example: '404'
   "/api/v2/properties/{propertyReference}":
     get:
       summary: Retrieves a property
@@ -105,6 +122,23 @@ paths:
                   errors:
                     type: string
                     example: Invalid auth token
+        '404':
+          description: Property not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        status:
+                          type: string
+                          example: '404'
   "/api/v2/properties":
     get:
       summary: Retrieves all matching properties given the query params

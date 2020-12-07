@@ -66,6 +66,33 @@ RSpec.describe "Cautionary Alerts API" do
 
         run_test!
       end
+
+      response "404", "Property not found" do
+        before do
+          stub_cautionary_alerts_property_request(
+            reference: "999",
+            response_body: "Property cautionary alert(s) for property reference 999 not found",
+            status: 404
+          )
+        end
+
+        schema type: :object,
+        properties: {
+          errors: {
+            type: :array,
+            items: {
+              type: :object,
+              properties: {
+                title: { type: :string },
+                status: { type: :string, example: "404" }
+              }
+            }
+          }
+        }
+
+        let(:propertyReference) { "999" }
+        run_test!
+      end
     end
   end
 end

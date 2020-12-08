@@ -77,9 +77,9 @@ paths:
       parameters:
       - name: propertyReference
         in: path
+        required: true
         description: The property reference
         example: '00023404'
-        required: true
         schema:
           type: string
       responses:
@@ -90,28 +90,42 @@ paths:
               schema:
                 type: object
                 properties:
-                  propertyReference:
-                    type: string
-                  address:
+                  property:
+                    type: object
                     properties:
-                      shortAddress:
+                      propertyReference:
                         type: string
-                      postalCode:
-                        type: string
-                      addressLine:
-                        type: string
-                      streetSuffix:
-                        type: string
-                  hierarchyType:
-                    properties:
-                      levelCode:
-                        type: string
-                      subTypeCode:
-                        type: string
-                      subTypeDescription:
-                        type: string
-                required:
-                - propertyReference
+                      address:
+                        properties:
+                          shortAddress:
+                            type: string
+                          postalCode:
+                            type: string
+                          addressLine:
+                            type: string
+                          streetSuffix:
+                            type: string
+                      hierarchyType:
+                        properties:
+                          levelCode:
+                            type: string
+                          subTypeCode:
+                            type: string
+                          subTypeDescription:
+                            type: string
+                  cautionaryAlerts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        alertCode:
+                          type: string
+                        description:
+                          type: string
+                        startDate:
+                          type: string
+                        endDate:
+                          type: string
         '401':
           description: Invalid auth token
           content:

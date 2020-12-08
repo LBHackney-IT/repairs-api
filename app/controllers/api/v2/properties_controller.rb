@@ -10,7 +10,7 @@ module Api
       end
 
       def show
-        @property = Property.for_reference(params[:id])
+        @property = PropertySearch.new(params).perform
 
         render json: @property.to_json
       end

@@ -10,7 +10,7 @@ RSpec.describe "Properties API" do
       tags "Properties"
       produces "application/json"
 
-      parameter name: :propertyReference, in: :path, type: :string, description: "The property reference", example: "00023404"
+      parameter name: :propertyReference, in: :path, required: true, type: :string, description: "The property reference", example: "00023404"
 
       response "200", "Property found" do
         let(:"Authorization") { "Bearer #{api_client.token}" }
@@ -27,28 +27,61 @@ RSpec.describe "Properties API" do
             },
             status: 200
           )
+
+          stub_cautionary_alerts_property_request(
+            reference: "00023404",
+            response_body:
+              {
+                "propertyReference": "00023404",
+                "alerts": [
+                  {
+                    "startDate": "2011-02-16",
+                    "endDate": "2020-01-01",
+                    "alertCode": "DIS",
+                    "description": "Property Under Disrepair"
+                  }
+                ]
+              },
+            status: 200
+          )
         end
 
         schema type: :object,
         properties: {
-          propertyReference: { type: :string },
-          address: {
+          property: {
+            type: :object,
             properties: {
-              shortAddress: { type: :string },
-              postalCode: { type: :string },
-              addressLine: { type: :string },
-              streetSuffix: { type: :string }
+              propertyReference: { type: :string },
+              address: {
+                properties: {
+                  shortAddress: { type: :string },
+                  postalCode: { type: :string },
+                  addressLine: { type: :string },
+                  streetSuffix: { type: :string }
+                }
+              },
+              hierarchyType: {
+                properties: {
+                  levelCode: { type: :string },
+                  subTypeCode: { type: :string },
+                  subTypeDescription: { type: :string }
+                }
+              }
             }
           },
-          hierarchyType: {
-            properties: {
-              levelCode: { type: :string },
-              subTypeCode: { type: :string },
-              subTypeDescription: { type: :string }
+          cautionaryAlerts: {
+            type: :array,
+            items: {
+              type: :object,
+              properties: {
+                alertCode: { type: :string },
+                description: { type: :string },
+                startDate: { type: :string },
+                endDate: { type: :string }
+              }
             }
           }
-        },
-        required: [ "propertyReference" ]
+        }
 
         let(:propertyReference) { "00023404" }
         run_test!

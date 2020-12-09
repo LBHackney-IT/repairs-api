@@ -201,6 +201,23 @@ RSpec.describe "Properties" do
           status: 200
         )
 
+        stub_cautionary_alerts_property_request(
+          reference: "100023022310",
+          response_body:
+            {
+              "propertyReference": "100023022310",
+              "alerts": [
+                {
+                  "startDate": "2011-02-16",
+                  "endDate": nil,
+                  "alertCode": "DIS",
+                  "description": "Property Under Disrepair"
+                }
+              ]
+            },
+          status: 200
+        )
+
         get("/api/v2/properties/100023022310", headers: headers)
       end
 
@@ -208,7 +225,7 @@ RSpec.describe "Properties" do
         parsed_response = JSON.parse(response.body)
 
         expect(parsed_response).to eq(
-          {
+          "property" => {
             "propertyReference" => "100023022310",
             "address" => {
               "shortAddress" => "1 Example Road",
@@ -221,7 +238,15 @@ RSpec.describe "Properties" do
               "subTypeCode" => "DWE",
               "subTypeDescription" => "Dwelling"
             }
-          }
+          },
+          "cautionaryAlerts" => [
+            {
+              "alertCode" => "DIS",
+              "description" => "Property Under Disrepair",
+              "startDate" => "2011-02-16",
+              "endDate" => nil
+            }
+          ]
         )
       end
     end

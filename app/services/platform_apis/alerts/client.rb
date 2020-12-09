@@ -1,16 +1,20 @@
 # frozen_string_literal: true
 
 module PlatformApis
-  module CautionaryAlerts
+  module Alerts
     class Client
       class_attribute :api_type
-      self.api_type = :cautionary_alerts
+      self.api_type = :alerts
 
       class << self
         include RequestConnection
 
-        def get_cautionary_alerts_by_property_reference(reference)
+        def get_alerts_by_property_reference(reference)
           request.retrieve("cautionary-alerts/properties/#{reference}")
+        end
+
+        def get_alerts_by_tenancy_reference(reference)
+          request.retrieve("cautionary-alerts/people?tag_ref=#{reference}")
         end
       end
     end

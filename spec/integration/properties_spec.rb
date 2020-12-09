@@ -28,7 +28,7 @@ RSpec.describe "Properties API" do
             status: 200
           )
 
-          stub_cautionary_alerts_property_request(
+          stub_alerts_property_request(
             reference: "00023404",
             response_body:
               {
@@ -39,6 +39,46 @@ RSpec.describe "Properties API" do
                     "endDate": "2020-01-01",
                     "alertCode": "DIS",
                     "description": "Property Under Disrepair"
+                  }
+                ]
+              },
+            status: 200
+          )
+
+          stub_tenancy_information_property_request(
+            reference: "00023404",
+            response_body:
+              {
+                "tenancies": [
+                  {
+                    "tenancyAgreementReference": "011111/01"
+                  }
+                ]
+              },
+            status: 200
+          )
+
+          stub_alerts_residents_request(
+            tag_ref: "011111/01",
+            response_body:
+              {
+                "contacts": [
+                  {
+                    "tenancyAgreementReference": "011111/01",
+                    "alerts": [
+                      {
+                        "startDate": "2018-04-13",
+                        "endDate": "2020-01-01",
+                        "alertCode": "CV",
+                        "description": "No Lone Visits"
+                      },
+                      {
+                        "startDate": "2018-04-13",
+                        "endDate": "2020-01-01",
+                        "alertCode": "VA",
+                        "description": "Verbal Abuse or Threat of"
+                      }
+                    ]
                   }
                 ]
               },
@@ -69,15 +109,32 @@ RSpec.describe "Properties API" do
               }
             }
           },
-          cautionaryAlerts: {
-            type: :array,
-            items: {
-              type: :object,
-              properties: {
-                alertCode: { type: :string },
-                description: { type: :string },
-                startDate: { type: :string },
-                endDate: { type: :string }
+          alerts: {
+            type: :object,
+            properties: {
+              locationAlert: {
+                type: :array,
+                items: {
+                  type: :object,
+                  properties: {
+                    type: { type: :string },
+                    comments: { type: :string },
+                    startDate: { type: :string },
+                    endDate: { type: :string }
+                  }
+                }
+              },
+              personAlert: {
+                type: :array,
+                items: {
+                  type: :object,
+                  properties: {
+                    type: { type: :string },
+                    comments: { type: :string },
+                    startDate: { type: :string },
+                    endDate: { type: :string }
+                  }
+                }
               }
             }
           }

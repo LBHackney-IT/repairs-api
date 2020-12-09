@@ -4,11 +4,11 @@ info:
   title: Repairs Hub Service API V2
   version: v2
 paths:
-  "/api/v2/properties/{propertyReference}/cautionary-alerts":
+  "/api/v2/properties/{propertyReference}/alerts":
     get:
-      summary: Retrieves cautionary alerts
+      summary: Retrieves alerts
       tags:
-      - Cautionary Alerts
+      - Alerts
       parameters:
       - name: propertyReference
         in: path
@@ -19,7 +19,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Gets all cautionary alerts for a property
+          description: Gets all alerts for a property
           content:
             application/json:
               schema:
@@ -27,14 +27,27 @@ paths:
                 properties:
                   propertyReference:
                     type: string
-                  alerts:
+                  locationAlert:
                     type: array
                     items:
                       type: object
                       properties:
-                        alertCode:
+                        type:
                           type: string
-                        description:
+                        comments:
+                          type: string
+                        startDate:
+                          type: string
+                        endDate:
+                          type: string
+                  personAlert:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        comments:
                           type: string
                         startDate:
                           type: string
@@ -52,23 +65,6 @@ paths:
                   errors:
                     type: string
                     example: Invalid auth token
-        '404':
-          description: Property not found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        title:
-                          type: string
-                        status:
-                          type: string
-                          example: '404'
   "/api/v2/properties/{propertyReference}":
     get:
       summary: Retrieves a property
@@ -113,19 +109,35 @@ paths:
                             type: string
                           subTypeDescription:
                             type: string
-                  cautionaryAlerts:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        alertCode:
-                          type: string
-                        description:
-                          type: string
-                        startDate:
-                          type: string
-                        endDate:
-                          type: string
+                  alerts:
+                    type: object
+                    properties:
+                      locationAlert:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                            comments:
+                              type: string
+                            startDate:
+                              type: string
+                            endDate:
+                              type: string
+                      personAlert:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                            comments:
+                              type: string
+                            startDate:
+                              type: string
+                            endDate:
+                              type: string
         '401':
           description: Invalid auth token
           content:

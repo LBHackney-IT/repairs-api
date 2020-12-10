@@ -138,6 +138,13 @@ paths:
                               type: string
                             endDate:
                               type: string
+                  tenure:
+                    type: object
+                    properties:
+                      typeCode:
+                        type: string
+                      typeDescription:
+                        type: string
         '401':
           description: Invalid auth token
           content:

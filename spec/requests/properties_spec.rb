@@ -200,110 +200,170 @@ RSpec.describe "Properties" do
             },
           status: 200
         )
-
-        stub_alerts_property_request(
-          reference: "100023022310",
-          response_body:
-            {
-              "propertyReference": "100023022310",
-              "alerts": [
-                {
-                  "startDate": "2011-02-16",
-                  "endDate": nil,
-                  "alertCode": "DIS",
-                  "description": "Property Under Disrepair"
-                }
-              ]
-            },
-          status: 200
-        )
-
-        stub_tenancy_information_property_request(
-          reference: "100023022310",
-          response_body:
-            {
-              "tenancies": [
-                {
-                  "tenancyAgreementReference": "011111/01"
-                }
-              ]
-            },
-          status: 200
-        )
-
-        stub_alerts_residents_request(
-          tag_ref: "011111/01",
-          response_body:
-            {
-              "contacts": [
-                {
-                  "tenancyAgreementReference": "011111/01",
-                  "alerts": [
-                    {
-                      "startDate": "2018-04-13",
-                      "endDate": nil,
-                      "alertCode": "CV",
-                      "description": "No Lone Visits"
-                    },
-                    {
-                      "startDate": "2018-04-13",
-                      "endDate": nil,
-                      "alertCode": "VA",
-                      "description": "Verbal Abuse or Threat of"
-                    }
-                  ]
-                }
-              ]
-            },
-          status: 200
-        )
-
-        get("/api/v2/properties/100023022310", headers: headers)
       end
 
-      it "returns a JSON representation from a single property" do
-        parsed_response = JSON.parse(response.body)
-
-        expect(parsed_response).to eq(
-          "property" => {
-            "propertyReference" => "100023022310",
-            "address" => {
-              "shortAddress" => "1 Example Road",
-              "postalCode" => "A1 1AA",
-              "addressLine" => "1 Example Road",
-              "streetSuffix" => ""
-            },
-            "hierarchyType" => {
-              "levelCode" => "1",
-              "subTypeCode" => "DWE",
-              "subTypeDescription" => "Dwelling"
-            }
-          },
-          "alerts" => {
-            "locationAlert" => [
+      context "with tenancy information details" do
+        before do
+          stub_alerts_property_request(
+            reference: "100023022310",
+            response_body:
               {
-                "type" => "DIS",
-                "comments" => "Property Under Disrepair",
-                "startDate" => "2011-02-16",
-                "endDate" => nil
-              }
-            ],
-            "personAlert" => [
-              {
-                "type" => "CV",
-                "comments" => "No Lone Visits",
-                "startDate" => "2018-04-13",
-                "endDate" => nil
+                "propertyReference": "100023022310",
+                "alerts": [
+                  {
+                    "startDate": "2011-02-16",
+                    "endDate": nil,
+                    "alertCode": "DIS",
+                    "description": "Property Under Disrepair"
+                  }
+                ]
               },
+            status: 200
+          )
+
+          stub_tenancy_information_property_request(
+            reference: "100023022310",
+            response_body:
               {
-                "type" => "VA",
-                "comments" => "Verbal Abuse or Threat of",
-                "startDate" => "2018-04-13",
-                "endDate" => nil
+                "tenancies": [
+                  {
+                    "tenancyAgreementReference": "011111/01",
+                    "tenureType": "SEC: Secure"
+                  }
+                ]
+              },
+            status: 200
+          )
+
+          stub_alerts_residents_request(
+            tag_ref: "011111/01",
+            response_body:
+              {
+                "contacts": [
+                  {
+                    "tenancyAgreementReference": "011111/01",
+                    "alerts": [
+                      {
+                        "startDate": "2018-04-13",
+                        "endDate": nil,
+                        "alertCode": "CV",
+                        "description": "No Lone Visits"
+                      },
+                      {
+                        "startDate": "2018-04-13",
+                        "endDate": nil,
+                        "alertCode": "VA",
+                        "description": "Verbal Abuse or Threat of"
+                      }
+                    ]
+                  }
+                ]
+              },
+            status: 200
+          )
+
+          get("/api/v2/properties/100023022310", headers: headers)
+        end
+
+        it "returns a JSON representation from a single property" do
+          parsed_response = JSON.parse(response.body)
+
+          expect(parsed_response).to eq(
+            "property" => {
+              "propertyReference" => "100023022310",
+              "address" => {
+                "shortAddress" => "1 Example Road",
+                "postalCode" => "A1 1AA",
+                "addressLine" => "1 Example Road",
+                "streetSuffix" => ""
+              },
+              "hierarchyType" => {
+                "levelCode" => "1",
+                "subTypeCode" => "DWE",
+                "subTypeDescription" => "Dwelling"
               }
-            ]
-          }
-        )
+            },
+            "alerts" => {
+              "locationAlert" => [
+                {
+                  "type" => "DIS",
+                  "comments" => "Property Under Disrepair",
+                  "startDate" => "2011-02-16",
+                  "endDate" => nil
+                }
+              ],
+              "personAlert" => [
+                {
+                  "type" => "CV",
+                  "comments" => "No Lone Visits",
+                  "startDate" => "2018-04-13",
+                  "endDate" => nil
+                },
+                {
+                  "type" => "VA",
+                  "comments" => "Verbal Abuse or Threat of",
+                  "startDate" => "2018-04-13",
+                  "endDate" => nil
+                }
+              ]
+            },
+            "tenure" => {
+              "typeCode" => "SEC",
+              "typeDescription" => "Secure"
+            }
+          )
+        end
+      end
+
+      context "with no tenancy information details" do
+        before do
+          stub_alerts_property_request(
+            reference: "100023022310",
+            response_body:
+              {
+                "propertyReference": "100023022310",
+                "alerts": []
+              },
+            status: 200
+          )
+
+          stub_tenancy_information_property_request(
+            reference: "100023022310",
+            response_body:
+              {
+                "tenancies": []
+              },
+            status: 200
+          )
+
+          get("/api/v2/properties/100023022310", headers: headers)
+        end
+
+        it "returns a JSON representation from a single property with no tenure details and no alerts" do
+          parsed_response = JSON.parse(response.body)
+
+          expect(parsed_response).to eq(
+            "property" => {
+              "propertyReference" => "100023022310",
+              "address" => {
+                "shortAddress" => "1 Example Road",
+                "postalCode" => "A1 1AA",
+                "addressLine" => "1 Example Road",
+                "streetSuffix" => ""
+              },
+              "hierarchyType" => {
+                "levelCode" => "1",
+                "subTypeCode" => "DWE",
+                "subTypeDescription" => "Dwelling"
+              }
+            },
+            "alerts" => {
+              "locationAlert" => [],
+              "personAlert" => []
+            },
+            "tenure" => nil
+          )
+        end
       end
     end
 

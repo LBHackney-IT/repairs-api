@@ -16,12 +16,17 @@ private
   def id_query
     {
       property: property,
-      alerts: alerts
+      alerts: alerts,
+      tenure: tenure
     }
   end
 
   def alerts
     Alert.for_property_reference(id)&.except(:propertyReference)
+  end
+
+  def tenure
+    Tenure.find_tenure_type(id)
   end
 
   def property

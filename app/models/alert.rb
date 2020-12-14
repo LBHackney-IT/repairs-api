@@ -3,15 +3,16 @@
 class Alert
   include ActiveModel::Model
 
-  attr_accessor :alertCode, :description, :startDate, :endDate
+  attr_accessor :locationAlert, :personAlert
 
   class << self
-    def build(attributes)
+    def for_property_reference(reference)
+      BuildAlertsService.new(reference).perform
+    end
+
+    def build(alerts)
       new(
-        alertCode: attributes["alertCode"],
-        description: attributes["description"],
-        startDate: attributes["startDate"],
-        endDate: attributes["endDate"]
+        "#{to_s.camelize(:lower)}": alerts.map { |alert| AlertEntry.build(alert) }
       )
     end
   end

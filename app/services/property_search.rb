@@ -16,16 +16,12 @@ private
   def id_query
     {
       property: property,
-      cautionaryAlerts: cautionary_alerts
+      alerts: alerts
     }
   end
 
-  # The property exists, but the alerts API has returned a 404, so we return
-  # an array for consistency
-  def cautionary_alerts
-    CautionaryAlert.for_property_reference(id).alerts
-  rescue Request::RecordNotFoundError
-    []
+  def alerts
+    Alert.for_property_reference(id)&.except(:propertyReference)
   end
 
   def property

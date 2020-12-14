@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v2 do
       resources :properties, only: %i(index show) do
-        resources :cautionary_alerts, path: "/cautionary-alerts", only: [:index]
+        resources :alerts, only: [:index]
       end
     end
   end

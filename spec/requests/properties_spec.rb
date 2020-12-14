@@ -201,7 +201,7 @@ RSpec.describe "Properties" do
           status: 200
         )
 
-        stub_cautionary_alerts_property_request(
+        stub_alerts_property_request(
           reference: "100023022310",
           response_body:
             {
@@ -212,6 +212,46 @@ RSpec.describe "Properties" do
                   "endDate": nil,
                   "alertCode": "DIS",
                   "description": "Property Under Disrepair"
+                }
+              ]
+            },
+          status: 200
+        )
+
+        stub_tenancy_information_property_request(
+          reference: "100023022310",
+          response_body:
+            {
+              "tenancies": [
+                {
+                  "tenancyAgreementReference": "011111/01"
+                }
+              ]
+            },
+          status: 200
+        )
+
+        stub_alerts_residents_request(
+          tag_ref: "011111/01",
+          response_body:
+            {
+              "contacts": [
+                {
+                  "tenancyAgreementReference": "011111/01",
+                  "alerts": [
+                    {
+                      "startDate": "2018-04-13",
+                      "endDate": nil,
+                      "alertCode": "CV",
+                      "description": "No Lone Visits"
+                    },
+                    {
+                      "startDate": "2018-04-13",
+                      "endDate": nil,
+                      "alertCode": "VA",
+                      "description": "Verbal Abuse or Threat of"
+                    }
+                  ]
                 }
               ]
             },
@@ -239,14 +279,30 @@ RSpec.describe "Properties" do
               "subTypeDescription" => "Dwelling"
             }
           },
-          "cautionaryAlerts" => [
-            {
-              "alertCode" => "DIS",
-              "description" => "Property Under Disrepair",
-              "startDate" => "2011-02-16",
-              "endDate" => nil
-            }
-          ]
+          "alerts" => {
+            "locationAlert" => [
+              {
+                "type" => "DIS",
+                "comments" => "Property Under Disrepair",
+                "startDate" => "2011-02-16",
+                "endDate" => nil
+              }
+            ],
+            "personAlert" => [
+              {
+                "type" => "CV",
+                "comments" => "No Lone Visits",
+                "startDate" => "2018-04-13",
+                "endDate" => nil
+              },
+              {
+                "type" => "VA",
+                "comments" => "Verbal Abuse or Threat of",
+                "startDate" => "2018-04-13",
+                "endDate" => nil
+              }
+            ]
+          }
         )
       end
     end

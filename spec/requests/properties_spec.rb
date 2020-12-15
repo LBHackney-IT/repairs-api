@@ -322,7 +322,8 @@ RSpec.describe "Properties" do
             },
             "tenure" => {
               "typeCode" => "SEC",
-              "typeDescription" => "Secure"
+              "typeDescription" => "Secure",
+              "canRaiseRepair" => true
             }
           )
         end

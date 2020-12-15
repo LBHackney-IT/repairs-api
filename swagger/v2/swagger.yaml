@@ -145,6 +145,8 @@ paths:
                         type: string
                       typeDescription:
                         type: string
+                      canRaiseRepair:
+                        type: boolean
         '401':
           description: Invalid auth token
           content:

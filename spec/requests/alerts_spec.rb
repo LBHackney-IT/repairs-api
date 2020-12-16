@@ -113,47 +113,78 @@ RSpec.describe "Alerts" do
             },
           status: 200
         )
-
-        stub_tenancy_information_property_request(
-          reference: "0001234",
-          response_body:
-            {
-              "tenancies": [
-                {
-                  "tenancyAgreementReference": "011111/01"
-                }
-              ]
-            },
-          status: 200
-        )
-
-        stub_alerts_residents_request(
-          tag_ref: "011111/01",
-          response_body:
-            {
-              "contacts": [
-                {
-                  "tenancyAgreementReference": "011111/01",
-                  "alerts": []
-                }
-              ]
-            },
-          status: 200
-        )
-
-        get("/api/v2/properties/0001234/alerts", headers: headers)
       end
 
-      it "returns a JSON representation from a single property" do
-        parsed_response = JSON.parse(response.body)
+      context "when a tenancy agreement reference is found" do
+        before do
+          stub_tenancy_information_property_request(
+            reference: "0001234",
+            response_body:
+              {
+                "tenancies": [
+                  {
+                    "tenancyAgreementReference": "011111/01"
+                  }
+                ]
+              },
+            status: 200
+          )
 
-        expect(parsed_response).to eq(
-          {
-            "propertyReference" => "0001234",
-            "locationAlert" => [],
-            "personAlert" => []
-          }
-        )
+          stub_alerts_residents_request(
+            tag_ref: "011111/01",
+            response_body:
+              {
+                "contacts": [
+                  {
+                    "tenancyAgreementReference": "011111/01",
+                    "alerts": []
+                  }
+                ]
+              },
+            status: 200
+          )
+
+          get("/api/v2/properties/0001234/alerts", headers: headers)
+        end
+
+        it "returns a JSON representation for a property without alerts" do
+          parsed_response = JSON.parse(response.body)
+
+          expect(parsed_response).to eq(
+            {
+              "propertyReference" => "0001234",
+              "locationAlert" => [],
+              "personAlert" => []
+            }
+          )
+        end
+      end
+
+      context "when a tenancy agreement reference is not found" do
+        before do
+          stub_tenancy_information_property_request(
+            reference: "0001234",
+            response_body:
+              {
+                "tenancies": []
+              },
+            status: 200
+          )
+
+          get("/api/v2/properties/0001234/alerts", headers: headers)
+        end
+
+        it "returns a JSON representation for a property without alerts" do
+          parsed_response = JSON.parse(response.body)
+
+          expect(parsed_response).to eq(
+            {
+              "propertyReference" => "0001234",
+              "locationAlert" => [],
+              "personAlert" => []
+            }
+          )
+        end
       end
     end
 

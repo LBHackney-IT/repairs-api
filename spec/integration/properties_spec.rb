@@ -143,7 +143,8 @@ RSpec.describe "Properties API" do
             type: :object,
             properties: {
               typeCode: { type: :string },
-              typeDescription: { type: :string }
+              typeDescription: { type: :string },
+              canRaiseRepair: { type: :boolean }
             }
           }
         }

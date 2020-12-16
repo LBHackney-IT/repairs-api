@@ -204,6 +204,19 @@ RSpec.describe "Properties" do
 
       context "with tenancy information details" do
         before do
+          stub_property_request(
+            reference: "100023022310",
+            response_body:
+              {
+                propRef: "100023022310",
+                address1: "1 Example Road",
+                postCode: "A1 1AA",
+                levelCode: "1",
+                subtypCode: "DWE"
+              },
+            status: 200
+          )
+
           stub_alerts_property_request(
             reference: "100023022310",
             response_body:
@@ -309,7 +322,8 @@ RSpec.describe "Properties" do
             },
             "tenure" => {
               "typeCode" => "SEC",
-              "typeDescription" => "Secure"
+              "typeDescription" => "Secure",
+              "canRaiseRepair" => true
             }
           )
         end
@@ -317,18 +331,31 @@ RSpec.describe "Properties" do
 
       context "with no tenancy information details" do
         before do
-          stub_alerts_property_request(
-            reference: "100023022310",
+          stub_property_request(
+            reference: "100012345678",
             response_body:
               {
-                "propertyReference": "100023022310",
+                propRef: "100012345678",
+                address1: "1 Example Road",
+                postCode: "A1 1AA",
+                levelCode: "1",
+                subtypCode: "DWE"
+              },
+            status: 200
+          )
+
+          stub_alerts_property_request(
+            reference: "100012345678",
+            response_body:
+              {
+                "propertyReference": "100012345678",
                 "alerts": []
               },
             status: 200
           )
 
           stub_tenancy_information_property_request(
-            reference: "100023022310",
+            reference: "100012345678",
             response_body:
               {
                 "tenancies": []
@@ -336,7 +363,7 @@ RSpec.describe "Properties" do
             status: 200
           )
 
-          get("/api/v2/properties/100023022310", headers: headers)
+          get("/api/v2/properties/100012345678", headers: headers)
         end
 
         it "returns a JSON representation from a single property with no tenure details and no alerts" do
@@ -344,7 +371,7 @@ RSpec.describe "Properties" do
 
           expect(parsed_response).to eq(
             "property" => {
-              "propertyReference" => "100023022310",
+              "propertyReference" => "100012345678",
               "address" => {
                 "shortAddress" => "1 Example Road",
                 "postalCode" => "A1 1AA",

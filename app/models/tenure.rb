@@ -3,7 +3,10 @@
 class Tenure
   include ActiveModel::Model
 
-  attr_accessor :typeCode, :typeDescription
+  # Raisable tenure codes taken from Repairs Hub V1
+  RAISABLE_TENURES = %w(ASY COM DEC INT MPA NON PVG SEC TAF TGA TRA)
+
+  attr_accessor :typeCode, :typeDescription, :canRaiseRepair
 
   class << self
     def find_tenure_type(reference)
@@ -21,8 +24,13 @@ class Tenure
     def build(attribute)
       new(
         typeCode: attribute.split(": ").first,
-        typeDescription: attribute.split(": ").last
+        typeDescription: attribute.split(": ").last,
+        canRaiseRepair: can_raise_a_repair?(attribute.split(": ").first)
       )
+    end
+
+    def can_raise_a_repair?(tenure_code)
+      RAISABLE_TENURES.include?(tenure_code)
     end
   end
 end

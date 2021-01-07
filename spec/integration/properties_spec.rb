@@ -52,7 +52,8 @@ RSpec.describe "Properties API" do
                 "tenancies": [
                   {
                     "tenancyAgreementReference": "011111/01",
-                    "tenureType": "SEC: Secure"
+                    "tenureType": "SEC: Secure",
+                    "present": true
                   }
                 ]
               },

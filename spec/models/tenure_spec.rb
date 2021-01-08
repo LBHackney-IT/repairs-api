@@ -3,21 +3,25 @@
 require "rails_helper"
 
 RSpec.describe Tenure do
-  let(:tenure_attributes) do
-    {
-      "tenancies" => [
-        {
-          "tenancyAgreementReference" => "011111/01",
-          "tenureType" => "SEC: Secure"
-        }
-      ]
-    }
-  end
-
   describe ".find_tenure_type" do
+    let(:tenure_attributes) do
+      {
+        "tenancies" => [
+          {
+            "tenureType" => "SEC: Secure",
+            "present" => false
+          },
+          {
+            "tenureType" => "MPA: Mesne Profit Ac",
+            "present" => true
+          }
+        ]
+      }
+    end
+
     let(:reference) { "100023022310" }
 
-    it "returns a tenure object built from the API client response" do
+    it "returns any current tenure object built from the API client response" do
       allow(PlatformApis::TenancyInformation::Client).to receive(
         :get_tenancy_information_by_property_reference
       ).with(reference).and_return(
@@ -26,15 +30,15 @@ RSpec.describe Tenure do
 
       tenure = described_class.find_tenure_type(reference)
 
-      expect(tenure.typeCode).to eq "SEC"
-      expect(tenure.typeDescription).to eq("Secure")
+      expect(tenure.typeCode).to eq "MPA"
+      expect(tenure.typeDescription).to eq("Mesne Profit Ac")
       expect(tenure.canRaiseRepair).to eq(true)
     end
   end
 
   describe ".build" do
     it "builds a new tenure with supplied attributes" do
-      tenure = described_class.build(tenure_attributes["tenancies"].first["tenureType"])
+      tenure = described_class.build("SEC: Secure")
 
       expect(tenure.typeCode).to eq "SEC"
       expect(tenure.typeDescription).to eq("Secure")

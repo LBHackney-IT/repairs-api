@@ -15,7 +15,11 @@ class Tenure
       # The API returns a 200 with response "tenancies": [] when no
       # tenancy agreement reference can be found for a property.
       # In this case we will return nil if response["tenancies"] is empty
-      build(response["tenancies"].first["tenureType"]) if response["tenancies"].any?
+      if response["tenancies"].any?
+        current_tenancy = response["tenancies"].find { |t| t["present"] }
+
+        build(current_tenancy["tenureType"]) if current_tenancy
+      end
     end
 
     # we are receiving just 1 line of a string as a response: "LEA: Leasehold (RTB)"
